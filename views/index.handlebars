@@ -1,0 +1,45 @@
+    <div class="jumbotron">
+      <h3>Sentinel Colors</h3>
+        <form id="colorCode" action="/colors/create" method="POST">
+          <div class="messages"></div>
+          <div class="controls">
+            <!-- <div class="form-row"> -->
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Color<i class="text-danger">*</i></label>
+                <input type="text" class="form-control" name="colorName" id="color" placeholder="Color" required="required" data-error="Color is required.">
+                <div class="help-block with-errors"></div>
+              </div>
+            <!-- </div> -->
+
+                <!-- <div class="form-row"> -->
+                <div class="form-group col-md-6">
+                      <label for="inputEmail4">Category<i class="text-danger">*</i></label>
+                      <input type="text" class="form-control" name="category" id="category" placeholder="Category" required="required" data-error="Category is required.">
+                      <div class="help-block with-errors"></div>
+                    </div>
+                  <!-- </div> -->
+              
+                  <!-- <div class="form-row"> -->
+                  <div class="form-group col-md-6">
+                      <label for="colorType">Color Type<i class="text-danger">*</i></label>
+                      <select class="form-control" name="colorType" id="colorType">
+                        <option value="Primary">Primary</option>
+                        <option value="Secondary">Secondary</option>
+                        <option selected value="Tertiary">Tertiary</option>
+                        <option value="None">None</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                  <!-- </div> -->
+                          
+          <!-- <div class="form-row"> -->
+          <div class="form-group col-md-6">
+              <label for="inputEmail4">Hex<i class="text-danger">*</i></label>
+              <input type="text" class="form-control" name="hex" id="hex" value="#" placeholder="hex" required="required" data-error="Hex is required.">
+              <div class="help-block with-errors"></div>
+            </div>
+          <!-- </div> -->
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+    </div>
