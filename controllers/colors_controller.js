@@ -36,7 +36,7 @@ router.post('/colors/create', (req,res) => {
         colorType: req.body.colorType,
         hex: req.body.hex
     }).then((dbColor) => {
-        // console.log(dbColor);
+        console.log(dbColor);
         return res.render("added", dbColor);
     });
 });
