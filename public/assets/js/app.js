@@ -1,9 +1,4 @@
 $(document).ready(function(){
-    var chartData = [];
-    var primarycounter = 0;
-    var secondarycounter = 0;
-    var tertiarycounter = 0;
-    var nonecounter = 0;
     $("#searchTerm").selectize({
         maxItems: 1,
         create: false,
