@@ -34,28 +34,9 @@ $(document).ready(function(){
         }
     });
 
-    fetch('/api/colors').then(function(data){
+    fetch('/api/colors/charts').then(function(data){
         return data.json();
-    }).then(function(myJson) {
-        //console.log(myJson);
-        var data = myJson;
-        for (key in data){
-            if (data[key].colorType == "Primary")
-            {
-                primarycounter++;
-            } else if (data[key].colorType == "Secondary"){
-                secondarycounter++;
-            } else if (data[key].colorType == "Tertiary"){
-                tertiarycounter++;
-            } else {
-                nonecounter++;
-            }
-        }
-        chartData.push(primarycounter);
-        chartData.push(secondarycounter);
-        chartData.push(tertiarycounter);
-        chartData.push(nonecounter);
-
+    }).then(function(data) {
         var ctx = $('#myChart');
         var myChart = new Chart (ctx, {
             type: "bar",
@@ -63,7 +44,7 @@ $(document).ready(function(){
                 labels: ['Primary', 'Secondary', 'Tertiary', 'None'],
                 datasets: [{
                     label: "Colors Types",
-                    data: chartData,
+                    data: data,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

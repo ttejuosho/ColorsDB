@@ -14,7 +14,6 @@ router.get('/index', (req,res) => {
                 var hbsObject = {
                     color: dbColor
                 };
-                // console.log(dbColor);
                 return res.render("index", hbsObject);
             });
 });
@@ -36,7 +35,6 @@ router.post('/colors/create', (req,res) => {
         colorType: req.body.colorType,
         hex: req.body.hex
     }).then((dbColor) => {
-        console.log(dbColor);
         return res.render("added", dbColor);
     });
 });
@@ -44,7 +42,6 @@ router.post('/colors/create', (req,res) => {
 router.get('/colors/:id/update', (req,res) => {
     db.Color.findById(req.params.id)
          .then((dbColor) => {
-        console.log(dbColor);
         res.render('colors/update', dbColor.dataValues);
     }).catch((err) => {
         res.render('error', err);

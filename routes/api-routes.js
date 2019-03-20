@@ -13,6 +13,39 @@ module.exports = function(app) {
     });
   });   
 
+app.get("/api/colors/charts", (req,res) => {
+    var dr = [];
+    db.Color.count({
+        where: {
+            colorType: "Primary"
+        }
+    }).then(num => {
+        dr.push(num);
+    });
+    db.Color.count({
+        where: {
+            colorType: "Secondary"
+        }
+    }).then(num => {
+        dr.push(num);
+    });
+    db.Color.count({
+        where: {
+            colorType: "Tertiary"
+        }
+    }).then(num => {
+        dr.push(num);
+    });
+    db.Color.count({
+        where: {
+            colorType: "None"
+        }
+    }).then(num => {
+        dr.push(num);
+        res.json(dr);
+    });
+});
+
   app.get('/api/colors/name/:colorName', (req,res) => {
     db.Color.findOne({
         where: {
