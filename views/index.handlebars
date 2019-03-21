@@ -3,7 +3,7 @@
     <div class="jumbotron">
       <center><h3>Add A Color</h3></center>
         <form id="colorCode" action="/colors/create" method="POST">
-          <div class="messages"></div>
+          <div class="messages text-danger d-none">This color already exists</div>
           <div class="controls">
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-12">
@@ -40,7 +40,7 @@
               <div class="help-block with-errors"></div>
             </div>
           <!-- </div> -->
-          <button type="submit" class="btn btn-secondary float-right mr-3">Submit</button>
+          <button type="submit" class="btn btn-secondary float-right mr-3" onclick="isUnique()">Submit</button>
         </div>
         </form>
     </div>
@@ -49,4 +49,3 @@
         <canvas id="myChart" width="200" height="200"></canvas>
       </div>
     </div>
-
