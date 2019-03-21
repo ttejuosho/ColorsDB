@@ -91,7 +91,7 @@ fetch('/api/colors/charts').then(function(data){
         data: {
             labels: ['Primary', 'Secondary', 'Tertiary', 'None'],
             datasets: [{
-                label: "Colors Types",
+                label: "Color Type Chart",
                 data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
