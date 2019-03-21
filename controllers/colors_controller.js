@@ -37,7 +37,10 @@ router.post('/colors/create', (req,res) => {
     }).then((dbColor) => {
         return res.render("added", dbColor);
     });
+
 });
+
+
 
 router.get('/colors/:id/update', (req,res) => {
     db.Color.findById(req.params.id)
@@ -67,7 +70,6 @@ router.put('/colors/:id/update', (req,res) => {
 	});
 });
 
-
 // Search Routes
 // ============================================================
 router.get('/colors/:id', (req,res)=>{
@@ -92,9 +94,7 @@ router.get('/colors/:id/delete', (req,res) => {
     }).then( () => { res.redirect('/table');
     }).catch((err) => { res.render('error', err)
     })
-    });
-    });
-
-
+});
+});
 
 module.exports = router;

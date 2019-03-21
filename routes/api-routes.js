@@ -75,7 +75,7 @@ app.get("/api/colors/charts", (req,res) => {
     }).then( (dbColor) => {
         res.json(dbColor);
     });
-  });
+});
 
   app.put('/api/colors/', (req,res) => {
     db.Color.update({
@@ -101,6 +101,5 @@ app.get("/api/colors/charts", (req,res) => {
           res.json(dbColor);
       });
   });
-
 
 }
