@@ -55,7 +55,7 @@ var colorsTable;
                 create: false,
                 valueField: 'colorName',
                 labelField: 'colorName',
-                searchField: 'colorName',
+                searchField: ['colorName', 'hex', 'colorType'],
                 preload: true,
                 render: {
                     option: function(item, escape) {
@@ -72,15 +72,6 @@ var colorsTable;
             });
         }
     });
-
-function isUnique(){
-    if ($('#searchTerm')[0].selectize.search($('#color').val()).items.length == 0){
-        return true;
-    } else {
-        $('.messages').removeClass('d-none');
-        return false;
-    }
-}
 
 fetch('/api/colors/charts').then(function(data){
     return data.json();
