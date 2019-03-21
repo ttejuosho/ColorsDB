@@ -1,21 +1,22 @@
 
     <div class="jumbotron">
-      <h3>Sentinel Colors DB</h3>
+      <h3>Color Lab DB</h3>
       <div>
         <div id="noColor"></div>
         <div class="tableDiv"></div>
-        <table class="table table-striped">
+        <table id="colorsTable" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                 <th scope="col">S/No</th>
-                <th scope="col">Color Name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Type</th>
-                <th scope="col">Hex</th>
+                <th scope="col" style="text-align: center">Color Name</th>
+                <th scope="col" style="text-align: center">Category</th>
+                <th scope="col" style="text-align: center">Type</th>
+                <th scope="col" style="text-align: center">Hex</th>
+                <th scope="col" style="text-align: center">Options</th>
                 </tr>
             </thead>
             <tbody class="colorsTableBody">
-                {{#each color}}
+                {{!-- {{#each color}}
                 <tr>
                     <th scope="row">{{this.id}}</th>
                     <td><a href="/colors/{{dataValues.id}}">{{this.colorName}}</a></td>
@@ -27,7 +28,7 @@
 						<a href="/colors/{{dataValues.id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Color?')">Delete</a>
                     </td>
                 </tr>
-                {{/each}}
+                {{/each}} --}}
             </tbody>
         </table>
       </div>
