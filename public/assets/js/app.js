@@ -14,7 +14,10 @@ var colorsTable;
                 },
                 {
                     data: 'colorName',
-                    className: 'colorName text-center'
+                    className: 'colorName text-center',
+                    render: function(data, type, row, meta){
+                        return '<a href="/colors/'+ row.id +'">'+ data +'</a>';
+                    }
                 },
                 {
                     data: 'category',
