@@ -13,7 +13,15 @@
             <!-- <div class="form-row"> -->
             <div class="form-group col-md-12">
                   <label for="inputEmail4">Category</label>
-                  <input type="text" class="form-control" name="category" id="category" value="{{category}}" placeholder="Category">
+                  {{!-- <input type="text" class="form-control" name="category" id="category" value="{{category}}" placeholder="Category"> --}}
+                    <select class="form-control" name="category" id="category">
+                      <option selected value="Monochromatic">Monochromatic</option>
+                      <option value="Complementary">Complementary</option>
+                      <option value="Color Triads">Color Triads</option>
+                      <option value="Split Complementary">Split Complementary</option>
+                      <option value="Warm Colors">Warm Colors</option>
+                      <option value="Cool Colors">Cool Colors</option>
+                    </select>
                 </div>
               <!-- </div> -->
           
