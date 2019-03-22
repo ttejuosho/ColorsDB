@@ -7,22 +7,30 @@
           <div class="controls">
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-12">
-                <label for="color">Color<i class="text-danger">*</i></label>
+                <label for="color"><i class="text-danger mr-1">*</i>Color</label>
                 <input type="text" class="form-control" name="colorName" id="color" placeholder="Color" required="required" data-error="Color is required.">
                 <div class="help-block with-errors"></div>
               </div>
             <!-- </div> -->
                 <!-- <div class="form-row"> -->
                 <div class="form-group col-md-12">
-                      <label for="category">Category<i class="text-danger">*</i></label>
-                      <input type="text" class="form-control" name="category" id="category" placeholder="Category" required="required" data-error="Category is required.">
+                      <label for="category"><i class="text-danger mr-1">*</i>Category</label>
+                      {{!-- <input type="text" class="form-control" name="category" id="category" placeholder="Category" required="required" data-error="Category is required."> --}}
+                        <select class="form-control" name="category" id="category">
+                          <option selected value="Monochromatic">Monochromatic</option>
+                          <option value="Complementary">Complementary</option>
+                          <option value="Color Triads">Color Triads</option>
+                          <option value="Split Complementary">Split Complementary</option>
+                          <option value="Warm Colors">Warm Colors</option>
+                          <option value="Cool Colors">Cool Colors</option>
+                        </select>
                       <div class="help-block with-errors"></div>
                     </div>
                   <!-- </div> -->
               
                   <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12">
-                      <label for="colorType">Color Type<i class="text-danger">*</i></label>
+                      <label for="colorType"><i class="text-danger mr-1">*</i>Color Type</label>
                       <select class="form-control" name="colorType" id="colorType">
                         <option value="Primary">Primary</option>
                         <option value="Secondary">Secondary</option>
@@ -35,12 +43,12 @@
                           
           <!-- <div class="form-row"> -->
           <div class="form-group col-md-12">
-              <label for="hex">Hex<i class="text-danger">*</i></label>
+              <label for="hex"><i class="text-danger mr-1">*</i>Hex</label>
               <input type="text" class="form-control" name="hex" id="hex" value="#" placeholder="hex" required="required" data-error="Hex is required.">
               <div class="help-block with-errors"></div>
             </div>
           <!-- </div> -->
-          <button type="submit" class="btn btn-secondary float-right mr-3" onclick="isUnique()">Submit</button>
+          <button type="submit" class="btn btn-secondary btn-sm float-right mr-3">Submit</button>
         </div>
         </form>
     </div>
