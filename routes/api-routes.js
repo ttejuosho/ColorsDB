@@ -13,7 +13,7 @@ module.exports = function(app) {
     });
   });   
 
-app.get("/api/colors/charts", (req,res) => {
+app.get("/api/colors/typechart", (req,res) => {
     var dr = [];
     db.Color.count({
         where: {
@@ -44,6 +44,59 @@ app.get("/api/colors/charts", (req,res) => {
         dr.push(num);
         res.json(dr);
     });
+});
+
+app.get("/api/colors/categorychart", (req,res) => {
+    var categoryChartArrary = [];
+    db.Color.count({
+        where: {
+            category: "Monochromatic"
+        }
+    }).then(num => {
+        categoryChartArrary.push(num);
+    });
+
+    db.Color.count({
+        where: {
+            category: "Complementary"
+        }
+    }).then(num => {
+        categoryChartArrary.push(num);
+    });
+
+    db.Color.count({
+        where: {
+            category: "Color Triads"
+        }
+    }).then(num => {
+        categoryChartArrary.push(num);
+    });
+
+    db.Color.count({
+        where: {
+            category: "Split Complementary"
+        }
+    }).then(num => {
+        categoryChartArrary.push(num);
+    });
+
+    db.Color.count({
+        where: {
+            category: "Warm Colors"
+        }
+    }).then(num => {
+        categoryChartArrary.push(num);
+    });
+
+    db.Color.count({
+        where: {
+            category: "Cool Colors"
+        }
+    }).then(num => {
+        categoryChartArrary.push(num);
+        res.json(categoryChartArrary);
+    });
+
 });
 
   app.get('/api/colors/name/:colorName', (req,res) => {

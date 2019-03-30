@@ -28,6 +28,16 @@ router.get('/table', (req,res) => {
     });
 });
 
+router.get('/charts', (req,res) => {
+    db.Color.findAll({})
+    .then( (dbColor) => {
+        var hbsObject = {
+            color: dbColor
+        };
+        return res.render("charts", hbsObject);
+    });
+});
+
 router.post('/colors/create', (req,res) => {
     db.Color.create({
         colorName: req.body.colorName,
@@ -39,8 +49,6 @@ router.post('/colors/create', (req,res) => {
     });
 
 });
-
-
 
 router.get('/colors/:id/update', (req,res) => {
     db.Color.findById(req.params.id)

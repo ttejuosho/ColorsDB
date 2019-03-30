@@ -76,10 +76,10 @@ var colorsTable;
         }
     });
 
-fetch('/api/colors/charts').then(function(data){
+fetch('/api/colors/typechart').then(function(data){
     return data.json();
 }).then(function(data) {   
-    var ctx = $('#myChart');
+    var ctx = $('#TypeChart');
     var myChart = new Chart (ctx, {
         type: "bar",
         data: {
@@ -108,4 +108,37 @@ fetch('/api/colors/charts').then(function(data){
     })
 });
 
+fetch('/api/colors/categorychart').then(function(data){
+    return data.json();
+}).then(function(data) {   
+    var ctx = $('#CategoryChart');
+    var CategoryChart = new Chart (ctx, {
+        type: "pie",
+        data: {
+            labels: ['Monochromatic', 'Complementary', 'Color Triads', 'Split Complementary', 'Warm Colors', 'Cool Colors'],
+            datasets: [{
+                label: "Color Category Chart",
+                data: data,
+                backgroundColor: [
+                    '#008080',
+                    '#800000',
+                    '#FF00FF',
+                    '#00FF00',
+                    '#000080',
+                    '#FF0000'
+                ]
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+
+    })
+});
 });

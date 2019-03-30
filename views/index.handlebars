@@ -8,7 +8,7 @@
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-12">
                 <label for="color"><i class="text-danger mr-1">*</i>Color Name</label>
-                <input type="text" class="form-control" name="colorName" id="color" placeholder="Color" required="required" data-error="Color is required.">
+                <input type="text" class="form-control form-control-sm" name="colorName" id="color" placeholder="Color" required="required" data-error="Color is required.">
                 <div class="help-block with-errors"></div>
               </div>
             <!-- </div> -->
@@ -16,7 +16,7 @@
                 <div class="form-group col-md-12">
                       <label for="category"><i class="text-danger mr-1">*</i>Category</label>
                       {{!-- <input type="text" class="form-control" name="category" id="category" placeholder="Category" required="required" data-error="Category is required."> --}}
-                        <select class="form-control" name="category" id="category">
+                        <select class="form-control form-control-sm" name="category" id="category">
                           <option selected value="Monochromatic">Monochromatic</option>
                           <option value="Complementary">Complementary</option>
                           <option value="Color Triads">Color Triads</option>
@@ -31,7 +31,7 @@
                   <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12">
                       <label for="colorType"><i class="text-danger mr-1">*</i>Color Type</label>
-                      <select class="form-control" name="colorType" id="colorType">
+                      <select class="form-control form-control-sm" name="colorType" id="colorType">
                         <option value="Primary">Primary</option>
                         <option value="Secondary">Secondary</option>
                         <option selected value="Tertiary">Tertiary</option>
@@ -44,7 +44,7 @@
           <!-- <div class="form-row"> -->
           <div class="form-group col-md-12">
               <label for="hex"><i class="text-danger mr-1">*</i>Hex Code</label>
-              <input type="text" class="form-control" name="hex" id="hex" value="#" placeholder="hex" required="required" data-error="Hex is required.">
+              <input type="text" class="form-control form-control-sm" name="hex" id="hex" value="#" placeholder="hex" required="required" data-error="Hex is required.">
               <div class="help-block with-errors"></div>
             </div>
           <!-- </div> -->
@@ -53,7 +53,5 @@
         </form>
     </div>
     </div>
-      <div class="col-lg-5 col-sm-12">
-        <canvas id="myChart" width="200" height="200"></canvas>
-      </div>
+
     </div>
