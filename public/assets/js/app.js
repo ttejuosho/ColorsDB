@@ -7,6 +7,7 @@ var colorsTable;
                  "<'row'<'col-sm-12 col-md-4'i><'col-sm-12 col-md-8'p>>",
             data: data,
             rowId: 'id',
+            responsive: true,
             columns:[
                 {
                     data: 'id',
