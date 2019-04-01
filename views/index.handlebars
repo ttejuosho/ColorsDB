@@ -3,7 +3,7 @@
     <div class="jumbotron">
       <center><h3>Add A Color</h3></center>
         <form id="colorCode" action="/colors/create" method="POST">
-          <div class="messages text-danger d-none">This color already exists</div>
+          <div class="messages ml-3 text-danger font-weight-bold">{{error}}</div>
           <div class="controls">
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-12">
@@ -55,3 +55,4 @@
     </div>
 
     </div>
+

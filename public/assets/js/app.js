@@ -113,7 +113,7 @@ fetch('/api/colors/categorychart').then(function(data){
 }).then(function(data) {   
     var ctx = $('#CategoryChart');
     var CategoryChart = new Chart (ctx, {
-        type: "pie",
+        type: "doughnut",
         data: {
             labels: ['Monochromatic', 'Complementary', 'Color Triads', 'Split Complementary', 'Warm Colors', 'Cool Colors'],
             datasets: [{
@@ -141,4 +141,5 @@ fetch('/api/colors/categorychart').then(function(data){
 
     })
 });
+
 });

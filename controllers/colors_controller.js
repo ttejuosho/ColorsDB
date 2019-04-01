@@ -10,12 +10,12 @@ router.get('/', (req,res) => {
 
 router.get('/index', (req,res) => {
     db.Color.findAll({})
-            .then( (dbColor) => {
-                var hbsObject = {
-                    color: dbColor
-                };
-                return res.render("index", hbsObject);
-            });
+    .then( (dbColor) => {
+        var hbsObject = {
+            color: dbColor
+        };
+        return res.render("index", hbsObject);
+    });
 });
 
 router.get('/table', (req,res) => {
@@ -39,14 +39,29 @@ router.get('/charts', (req,res) => {
 });
 
 router.post('/colors/create', (req,res) => {
-    db.Color.create({
-        colorName: req.body.colorName,
-        category: req.body.category,
-        colorType: req.body.colorType,
-        hex: req.body.hex
+    db.Color.findOne({
+        where: {
+            colorName: req.body.colorName
+        }
     }).then((dbColor) => {
-        return res.render("added", dbColor);
-    });
+        if (dbColor == null){
+            db.Color.create({
+                colorName: req.body.colorName,
+                category: req.body.category,
+                colorType: req.body.colorType,
+                hex: req.body.hex
+            }).then((dbColor) => {
+                return res.render("added", dbColor);
+            }).catch((err) => {
+                res.render('error', err);
+            });
+    } else {
+        var err = {
+            error: "The color " + dbColor.colorName.toLowerCase() + " already exists in the database"
+        }
+        res.render("index",err);
+    }
+    })
 
 });
 

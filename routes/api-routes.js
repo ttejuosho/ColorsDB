@@ -120,15 +120,25 @@ app.get("/api/colors/categorychart", (req,res) => {
   });
 
   app.post('/api/colors', (req,res) => {
-    db.Color.create({
-        colorName: req.body.colorName,
-        category: req.body.category,
-        colorType: req.body.colorType,
-        hex: req.body.hex
-    }).then( (dbColor) => {
-        res.json(dbColor);
+    db.Color.findOne({
+        where: {
+            colorName:req.body.colorName
+        }
+    }).then((dbColor) => {
+        if (dbColor == null){
+            db.Color.create({
+                colorName: req.body.colorName,
+                category: req.body.category,
+                colorType: req.body.colorType,
+                hex: req.body.hex
+            }).then( (dbColor) => {
+                res.json(dbColor);
+            });
+        } else {
+            res.json("Color Already Exists");
+        }
     });
-});
+  });
 
   app.put('/api/colors/', (req,res) => {
     db.Color.update({
