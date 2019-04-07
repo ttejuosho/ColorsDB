@@ -3,29 +3,44 @@
       <div>
         <div id="noColor"></div>
         <div class="tableDiv"></div>
-        <table class="table table-striped">
+
+            <div class="row">
+                <label class="col-lg-auto">Color Name:</label>
+                <span class="col-lg-auto">{{colorName}}</span>
+            </div>
+            <div class="row">
+                <label class="col-lg-auto col-sm-12 text-left">Color Type:</label>
+                <span class="col-lg-auto col-sm-12">{{colorType}}</span>
+            </div>
+            <div class="row">
+                <label class="col-lg-auto col-sm-12 text-left">Category:</label>
+                <span class="col-lg-auto col-sm-12">{{category}}</span>
+            </div>
+            <div class="row">
+                <label class="col-lg-auto col-sm-12 text-left">Hex:</label>
+                <span class="col-lg-auto col-sm-12">{{hex}}</span>
+            </div>
+            <div class="row ml-1">
+                <a href="/colors/{{id}}/update" class="col btn btn-sm mr-2" style="background-color: {{{hex}}}; color: white">Edit</a>
+                <a href="/colors/{{id}}/delete" class="col btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Color?')">Delete</a>
+            </div>
+
+
+        {{!-- <table class="table table-striped">
             <thead>
-                <tr>
-                <th scope="col">S/No</th>
-                <th scope="col">Color Name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Type</th>
-                <th scope="col">Hex</th>
-                </tr>
+                <div class="row"><td class="col-auto">S/No</td><td class="col-auto">{{id}}</td></div>            
             </thead>
             <tbody class="colorsTableBody">
+                <th scope="row">{{id}}</th>
+                <tr><label class="col-4">Color Name:</label> <span class="col-4">{{colorName}}</span></tr>
+                <tr><th>{{category}}</th></tr>
+                <tr><th>{{colorType}}</th></tr>
+                <tr><th>{{hex}}</th></tr>
                 <tr>
-                    <th scope="row">{{id}}</th>
-                    <td>{{colorName}}</td>
-                    <td>{{category}}</td>
-                    <td>{{colorType}}</td>
-                    <td style="background-color: {{hex}}">{{hex}}</td>
-                    <td>
-						<a href="/colors/{{id}}/update" class="btn btn-warning btn-sm">Edit</a>
-						<a href="/colors/{{id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Color?')">Delete</a>
-                    </td>
+                    <a href="/colors/{{id}}/update" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/colors/{{id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Color?')">Delete</a>
                 </tr>
             </tbody>
-        </table>
+        </table> --}}
       </div>
     </div>
