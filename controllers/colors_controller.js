@@ -61,8 +61,7 @@ router.post('/colors/create', (req,res) => {
         }
         res.render("index",err);
     }
-    })
-
+    });
 });
 
 router.get('/colors/:id/update', (req,res) => {
