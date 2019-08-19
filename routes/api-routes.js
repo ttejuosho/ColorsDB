@@ -96,7 +96,6 @@ app.get("/api/colors/categorychart", (req,res) => {
         categoryChartArrary.push(num);
         res.json(categoryChartArrary);
     });
-
 });
 
   app.get('/api/colors/name/:colorName', (req,res) => {

@@ -86,7 +86,7 @@ router.put('/colors/:id/update', (req,res) => {
             id: req.params.id
         }
     }).then( (dbColor) => {
-        res.redirect('/table')
+        res.redirect('/table');
     }).catch((err) => {
 		res.render('error', err);
 	});
