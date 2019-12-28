@@ -139,7 +139,6 @@ fetch('/api/colors/categorychart').then(function(data){
                 }]
             }
         }
-
     })
 });
 
