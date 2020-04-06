@@ -1,5 +1,7 @@
 // Requiring our models
 var db = require("../models");
+const fs = require('fs')
+const https = require('https');
 
 // Routes
 // =============================================================
@@ -162,6 +164,34 @@ app.get("/api/colors/categorychart", (req,res) => {
       }).then( (dbColor) => {
           res.json(dbColor);
       });
+  });
+
+  app.get('/api/getActiveBusinesses', (req,res)=>{
+    db.Business.findAll({}).then(function(dbBusiness) {
+        // We have access to the colors as an argument inside of the callback function
+        res.json(dbBusiness);
+      });
+  });
+
+  app.get('/api/loadOdata', (req,res)=>{
+    //let jsonData = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
+    https.get('https://data.cityofchicago.org/api/odata/v4/uupf-x98q?$top=5', (response)=>{
+        let data = '';
+        response.on('data', (chunk) => {
+            data += chunk;
+          });
+        response.on('end', ()=>{
+            //res.json(JSON.parse(data));
+            let dataArray = JSON.parse(data);
+            //console.log(dataArray.value.length);
+            for (var i = 0; i < dataArray.value.length; i++){
+                db.Business.create(dataArray.value[i]);
+            }
+            res.json(JSON.parse(data));
+        }).on('error', (err) => {
+            console.log("Error: " + err.message);
+        });
+    });   
   });
 
 }
