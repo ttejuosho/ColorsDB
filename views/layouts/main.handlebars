@@ -12,7 +12,11 @@
 		<link rel="stylesheet" href="/assets/css/stylesheet.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="stylesheet" href="/assets/css/datatables.min.css"/>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- AOS -->
     <title>Colors DB</title>
 </head>
@@ -26,10 +30,9 @@
         </button>      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/table">Color Table <span class="sr-only">(current)</span></a>
-            </li>
-            <li><a class="nav-link" href="/charts">Charts</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/table">Color Table</a></li>
+            <li class="nav-item"><a class="nav-link" href="/charts">Charts</a></li>
+            <li class="nav-item"><a class="nav-link" href="/business">Business</a></li>
           </ul>
           <form class="form-inline my-2 my-lg-0" id="searchForm">
             <input class="form-control-sm mr-sm-2" id="searchTerm" type="search" placeholder="Search" aria-label="Search" style="width: 300px;"/>
@@ -37,15 +40,9 @@
           </form>
         </div>
       </nav>
-      <div class="container">
-        
-         {{{ body }}}
+      <div class="container">{{{ body }}}</div>
 
-      </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/assets/js/selectize.js"></script>
 <script type="text/javascript" src="/assets/js/utils.js"></script>
 <script type="text/javascript" src="/assets/js/Chart.min.js"></script>

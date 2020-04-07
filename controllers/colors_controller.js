@@ -8,6 +8,10 @@ router.get('/', (req,res) => {
     res.redirect('/index');
 });
 
+router.get('/business', (req,res) => {
+    res.render('business');
+});
+
 router.get('/index', (req,res) => {
     db.Color.findAll({})
     .then( (dbColor) => {
@@ -65,7 +69,7 @@ router.post('/colors/create', (req,res) => {
 });
 
 router.get('/colors/:id/update', (req,res) => {
-    db.Color.findById(req.params.id)
+    db.Color.findByPk(req.params.id)
          .then((dbColor) => {
         res.render('colors/update', dbColor.dataValues);
     }).catch((err) => {
@@ -95,7 +99,7 @@ router.put('/colors/:id/update', (req,res) => {
 // Search Routes
 // ============================================================
 router.get('/colors/:id', (req,res)=>{
-    db.Color.findById(req.params.id)
+    db.Color.findByPk(req.params.id)
             .then((dbColor) => {
         res.render('colors/color', dbColor.dataValues);
     }).catch((err) => {
@@ -107,7 +111,7 @@ router.get('/colors/:id', (req,res)=>{
 // ============================================================
 
 router.get('/colors/:id/delete', (req,res) => {
-    db.Color.findById(req.params.id)
+    db.Color.findByPk(req.params.id)
             .then( (dbColor) => {
                 db.Color.destroy({
         where: {
