@@ -160,10 +160,21 @@
         });
     }
 
-    fetch('/api/getActiveBusinesses').then(function(data){
-        return data.json();
-    }).then((data)=>{
-        renderBusinessTable(data);
+    //fetch('/api/getActiveBusinesses').then(function(data){
+        //return data.json();
+    //}).then((data)=>{
+        //renderBusinessTable(data);
+    //});
+
+        $.ajax({
+        url: '/api/getActiveBusinesses',
+        type: 'GET',
+        error: function() {
+            callback();
+        },
+        success: function(res) {   
+                    console.log(res);        
+            renderBusinessTable(res);
 
         $('#businessTable tbody').on('click', '.viewBusiness', function (){
             var rowId = $(this).data('licenseid');
@@ -184,5 +195,7 @@
                 show: true 
             });
         });
+
+        }
     });
     </script>
