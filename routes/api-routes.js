@@ -232,7 +232,7 @@ app.get("/api/colors/categorychart", (req,res) => {
             for (var i = 0; i < dataArray.value.length; i++){
                 db.Business.create(dataArray.value[i]);
             }
-            res.json('JSON.parse(data)');
+            res.json('data migrated to the cloud');
         }).on('error', (err) => {
             console.log("Error: " + err.message);
         });
