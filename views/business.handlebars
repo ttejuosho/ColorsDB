@@ -74,6 +74,8 @@
 <div class="businessDiv jumbotron">
     <h3>Chicago Businesses</h3>
     <div>
+<!-- this will show our spinner -->
+<div hidden id="spinner"></div>
         <div id="noBusiness"></div>
         <div class="tableDiv"></div>
         <table id="businessTable" class="table table-striped" style="width:100%">
@@ -96,6 +98,7 @@
 
 <script type="text/javascript">
     var businessTable;
+    $('#spinner').removeAttr('hidden');
     function renderBusinessTable(data) {
         businessTable = $('#businessTable').DataTable({
             dom: "<'row justify-content-between'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-4'f>>" +
@@ -167,6 +170,7 @@
     fetch('/api/getActiveBusinesses').then(function (data) {
         return data.json();
     }).then((data) => {
+        $('#spinner').attr('hidden', true);
         renderBusinessTable(data);
 
         $('#businessTable tbody').on('click', '.viewBusiness', function () {

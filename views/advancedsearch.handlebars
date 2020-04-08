@@ -3,7 +3,7 @@
     <div>
         <form>
             <div class="input-group mb-3">
-                <input type="text" id="searchBy" class="form-control form-control-sm" placeholder="Search"
+                <input type="text" id="searchBy" class="form-control" placeholder="Search"
                     aria-label="Search" aria-describedby="Search">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="goSearch">Search</button>
@@ -16,11 +16,14 @@
 
 
 <div id="resultsDiv"></div>
+<!-- this will show our spinner -->
+<div hidden id="spinner"></div>
 
 <script type="text/javascript">
 
     function loadBusinessData() {
         event.preventDefault();
+        $('#spinner').removeAttr('hidden');
         fetch('/api/search/' + $('#searchBy').val().toLowerCase()).then(function (data) {
             return data.json();
         }).then((res) => {
@@ -93,13 +96,14 @@
                     '</div>' +
                     '</div>' +
                     '</div>';
-
+                $('#spinner').attr('hidden', true);
                 $('#resultsDiv').append(html);
             }
             $('#showingResults').text('Displaying ' + data.length + ' results (' + res.processingTime / 1000 + ' seconds)');
         });
 
         $('#searchBy').val('');
+
     }
 
     $("#goSearch").click(() => {

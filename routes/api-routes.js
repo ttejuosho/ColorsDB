@@ -222,7 +222,7 @@ app.get("/api/colors/categorychart", (req,res) => {
   });
 
   app.get('/api/loadOdata', (req,res)=>{
-    https.get('https://data.cityofchicago.org/api/odata/v4/uupf-x98q?$top=2000', (response)=>{
+    https.get('https://data.cityofchicago.org/api/odata/v4/uupf-x98q?$skip=2000', (response)=>{
         let data = '';
         response.on('data', (chunk) => {
             data += chunk;
