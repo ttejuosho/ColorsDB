@@ -30,3 +30,11 @@ body {
     opacity: 0.95;
     padding: 4rem 2rem;
 }
+
+.selectize-input{
+    border: none !important;
+}
+
+.searchBy .form-control-sm{
+    padding: 0rem;
+}

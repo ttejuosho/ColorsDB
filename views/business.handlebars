@@ -1,107 +1,111 @@
-    <div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="businessModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="width: 700px;">
-            <div class="modal-header"><h4 id="businessName" class="text-primary"></h4></div>
+<div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="businessModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 700px;">
+            <div class="modal-header">
+                <h4 id="businessName" class="text-primary"></h4>
+            </div>
             <div class="modal-body pt-0 pr-0">
                 <form>
                     <div class="form-group row mb-0">
                         <label for="doing_business_as_name" class="col-sm-3 col-form-label">Business Name:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="doing_business_as_name"></span>
+                            <span class="form-control-plaintext" id="doing_business_as_name"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="legal_name" class="col-sm-3 col-form-label">Legal Name:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="legal_name"></span>
+                            <span class="form-control-plaintext" id="legal_name"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="license_id" class="col-sm-3 col-form-label">License Id:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="license_id"></span>
+                            <span class="form-control-plaintext" id="license_id"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="account_number" class="col-sm-3 col-form-label">Account Number:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="account_number"></span>
+                            <span class="form-control-plaintext" id="account_number"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="Address" class="col-sm-3 col-form-label">Address:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="address"></span>
+                            <span class="form-control-plaintext" id="address"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="license_description" class="col-sm-3 col-form-label">License Description:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="license_description"></span>
+                            <span class="form-control-plaintext" id="license_description"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="business_activity" class="col-sm-3 col-form-label">Business Activity:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="business_activity"></span>
+                            <span class="form-control-plaintext" id="business_activity"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="date_issued" class="col-sm-3 col-form-label">License Issued:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="date_issued"></span>
+                            <span class="form-control-plaintext" id="date_issued"></span>
                         </div>
                     </div>
                     <div class="form-group row mb-0">
                         <label for="expiration_date" class="col-sm-3 col-form-label">License Expires:</label>
                         <div class="col-sm-7">
-                        <span class="form-control-plaintext" id="expiration_date"></span>
+                            <span class="form-control-plaintext" id="expiration_date"></span>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal"
+                    aria-label="Close">Cancel</button>
             </div>
-          </div>
         </div>
     </div>
+</div>
 
-    <div class="businessDiv jumbotron">
-      <h3>Chicago Businesses</h3>
-      <div>
+<div class="businessDiv jumbotron">
+    <h3>Chicago Businesses</h3>
+    <div>
         <div id="noBusiness"></div>
         <div class="tableDiv"></div>
         <table id="businessTable" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
-                <th scope="col">License Id</th>
-                <th scope="col" style="text-align: center">Business Name</th>
-                <th scope="col" style="text-align: center">Legal Name</th>
-                <th scope="col" style="text-align: center">Address</th>
-                <th scope="col" style="text-align: center">Business Activity</th>
-                <th scope="col" style="text-align: center">License Type</th>
-                <th scope="col" style="text-align: center">License Date</th>
-                <th scope="col" style="text-align: center">License Expires</th>
+                    <th scope="col">License Id</th>
+                    <th scope="col" style="text-align: center">Business Name</th>
+                    <th scope="col" style="text-align: center">Legal Name</th>
+                    <th scope="col" style="text-align: center">Address</th>
+                    <th scope="col" style="text-align: center">Business Activity</th>
+                    <th scope="col" style="text-align: center">License Type</th>
+                    <th scope="col" style="text-align: center">License Date</th>
+                    <th scope="col" style="text-align: center">License Expires</th>
                 </tr>
             </thead>
             <tbody class="businessTableBody"></tbody>
         </table>
-      </div>
     </div>
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     var businessTable;
-    function renderBusinessTable(data){
+    function renderBusinessTable(data) {
         businessTable = $('#businessTable').DataTable({
             dom: "<'row justify-content-between'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-4'f>>" +
-                 "<'row'<'col-sm-12'tr>>" +
-                 "<'row'<'col-sm-12 col-md-4'i><'col-sm-12 col-md-8'p>>",
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-4'i><'col-sm-12 col-md-8'p>>",
             data: data,
-            rowId: 'license_id',
+            rowId: 'id',
             responsive: true,
-            order: [ [1, 'asc'] ],
-            columns:[
+            order: [[1, 'asc']],
+            columns: [
                 {
                     data: 'license_id',
                     className: 'license_id'
@@ -109,8 +113,8 @@
                 {
                     data: null,
                     className: 'doing_business_as_name text-center',
-                    render: function(data, type, row, meta){
-                        return row.doing_business_as_name + '<button type="button" rel="tooltip" class="btn btn-danger btn-sm ml-1 viewBusiness" data-licenseid="'+ row.license_id +'"><i class="fa fa-info-circle" aria-hidden="true"></i></button>';
+                    render: function (data, type, row, meta) {
+                        return row.doing_business_as_name + '<button type="button" rel="tooltip" class="btn btn-danger btn-sm ml-1 viewBusiness" data-licenseid="' + row.id + '"><i class="fa fa-info-circle" aria-hidden="true"></i></button>';
                     }
                 },
                 {
@@ -120,8 +124,8 @@
                 {
                     data: null,
                     className: 'address text-center',
-                    render: function(data, type, row, meta){
-                        return row.address +  ', ' + row.city +  ', ' + row.state + ', ' + row.zip_code + '.';
+                    render: function (data, type, row, meta) {
+                        return row.address + ', ' + row.city + ', ' + row.state + ', ' + row.zip_code + '.';
                     }
                 },
                 {
@@ -136,38 +140,38 @@
                     data: 'date_issued',
                     type: 'date',
                     className: 'date_issued text-center',
-                    render: function(data, type, row) {
-                    if (data !== null) {
-                        return moment(data).format('MM/DD/YYYY HH:mm');
-                    } else {
-                        return '';
+                    render: function (data, type, row) {
+                        if (data !== null) {
+                            return moment(data).format('MM/DD/YYYY HH:mm');
+                        } else {
+                            return '';
+                        }
                     }
-                }
                 },
                 {
                     data: 'expiration_date',
                     type: 'date',
                     className: 'expiration_date text-center',
-                    render: function(data, type, row) {
-                    if (data !== null) {
-                        return moment(data).format('MM/DD/YYYY HH:mm');
-                    } else {
-                        return '';
+                    render: function (data, type, row) {
+                        if (data !== null) {
+                            return moment(data).format('MM/DD/YYYY HH:mm');
+                        } else {
+                            return '';
+                        }
                     }
-                }
                 },
             ]
         });
     }
 
-    fetch('/api/getActiveBusinesses').then(function(data){
+    fetch('/api/getActiveBusinesses').then(function (data) {
         return data.json();
-    }).then((data)=>{
+    }).then((data) => {
         renderBusinessTable(data);
 
-        $('#businessTable tbody').on('click', '.viewBusiness', function (){
+        $('#businessTable tbody').on('click', '.viewBusiness', function () {
             var rowId = $(this).data('licenseid');
-            var data =  businessTable.row($('#' + rowId)).data();
+            var data = businessTable.row($('#' + rowId)).data();
             $('#businessName').text(data.doing_business_as_name);
             $('#account_number').text(data.account_number);
             $('#license_id').text(data.license_id);
@@ -176,13 +180,13 @@
             $('#address').text(data.address + ', ' + data.city + ', ' + data.state + ', ' + data.zip_code);
             $('#license_description').text(data.license_description);
             $('#business_activity').text(data.business_activity);
-            $('#date_issued').text(moment(data.date_issued).format('MM/DD/YYYY HH:mm'));
-            $('#expiration_date').text(moment(data.expiration_date).format('MM/DD/YYYY HH:mm'));
+            $('#date_issued').text(moment(data.date_issued).format('MM/DD/YYYY hh:mm A'));
+            $('#expiration_date').text(moment(data.expiration_date).format('MM/DD/YYYY hh:mm A'));
 
             $('#businessModal').modal({
                 backdrop: false,
-                show: true 
+                show: true
             });
         });
     });
-    </script>
+</script>

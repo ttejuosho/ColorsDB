@@ -1,0 +1,143 @@
+<div class="businessDiv jumbotron">
+      <h3>Search Chicago Businesses</h3>
+      <div>
+          <form>
+            <div class="input-group mb-3">
+                <input type="text" id="searchBy" class="form-control form-control-sm searchBy" placeholder="Search" aria-label="Search" aria-describedby="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="goSearch">Search</button>
+                </div>
+            </div>
+          </form>
+      </div>
+</div>
+
+    <div class="jumbotron d-none" id="businessModal" tabindex="-1" role="dialoog" aria-labelledby="businessModal" aria-hidden="true">
+        <div class="modall-dialog" role="documentt">
+          <div class="modall-content" style="width: 700px;">
+            <div class="modal-header pl-0"><h4 id="businessName" class="text-primary"></h4></div>
+            <div class="modall-body pt-0 pr-0">
+                <form>
+                    <div class="form-group row mb-0">
+                        <label for="doing_business_as_name" class="col-sm-3 col-form-label">Business Name:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="doing_business_as_name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="legal_name" class="col-sm-3 col-form-label">Legal Name:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="legal_name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="license_id" class="col-sm-3 col-form-label">License Id:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="license_id"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="account_number" class="col-sm-3 col-form-label">Account Number:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="account_number"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="Address" class="col-sm-3 col-form-label">Address:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="address"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="license_description" class="col-sm-3 col-form-label">License Description:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="license_description"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="business_activity" class="col-sm-3 col-form-label">Business Activity:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="business_activity"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="date_issued" class="col-sm-3 col-form-label">License Issued:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="date_issued"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="expiration_date" class="col-sm-3 col-form-label">License Expires:</label>
+                        <div class="col-sm-7">
+                        <span class="form-control-plaintext" id="expiration_date"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $('#businessModal').addClass('d-none');
+
+    fetch('/api/getActiveBusinesses').then(function(data){
+        return data.json();
+    }).then((data)=>{
+
+        $("#searchBy").selectize({
+            maxItems: 1,
+            create: false,
+            valueField: 'id',
+            labelField: 'doing_business_as_name',
+            searchField: ['doing_business_as_name', 'legal_name', 'business_activity','address','city','state','zip_code','license_description'],
+            preload: true,
+            render: {
+                option: function(item, escape) {
+                    return '<div>' + escape(item.doing_business_as_name) + '</div>';
+                }
+            },
+            load: function(query, callback) {
+                if (!query.length) return callback();
+                callback(data);
+            },
+            onChange: function(value){
+                //$("#goSearch").attr("onclick", "loadBusinessData("+ value +")");
+                //$("#goSearch").attr("href", "/getBusiness/" + $('#searchBy')[0].selectize.options[value].id);
+            }
+        });
+
+    });
+
+    $("#goSearch").click(()=>{
+        loadBusinessData();
+    });
+
+    $(document).keypress(function(e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
+        if (keycode == '13' && $('#searchBy')[0].selectize.getValue().length > 0) {
+            loadBusinessData();
+        }
+    });
+
+    function loadBusinessData(){
+        fetch('/api/getBusiness/' + $('#searchBy')[0].selectize.getValue()).then(function(data){
+            return data.json();
+        }).then((data)=>{
+            $('#businessName').text(data.doing_business_as_name);
+            $('#account_number').text(data.account_number);
+            $('#license_id').text(data.license_id);
+            $('#legal_name').text(data.legal_name);
+            $('#doing_business_as_name').text(data.doing_business_as_name);
+            $('#address').text(data.address + ', ' + data.city + ', ' + data.state + ', ' + data.zip_code);
+            $('#license_description').text(data.license_description);
+            $('#business_activity').text(data.business_activity);
+            $('#date_issued').text(moment(data.date_issued).format('MM/DD/YYYY HH:mm'));
+            $('#expiration_date').text(moment(data.expiration_date).format('MM/DD/YYYY HH:mm'));
+            $('#businessModal').removeClass('d-none');
+        });
+
+    }
+</script>

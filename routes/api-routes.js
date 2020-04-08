@@ -1,6 +1,6 @@
 // Requiring our models
 var db = require("../models");
-const fs = require('fs')
+var Sequelize = require('sequelize');
 const https = require('https');
 
 // Routes
@@ -168,26 +168,71 @@ app.get("/api/colors/categorychart", (req,res) => {
 
   app.get('/api/getActiveBusinesses', (req,res)=>{
     db.Business.findAll({}).then(function(dbBusiness) {
-        // We have access to the colors as an argument inside of the callback function
         res.json(dbBusiness);
+      }).catch(function(err) {
+         res.render('error', err);
       });
   });
 
+  app.get('/api/searchBusiness/:searchBy/:searchValue', (req, res)=>{
+    var searchObject = {};
+    searchObject[req.params.searchBy] =  req.params.searchValue;
+    db.Business.findAll({
+        where: searchObject
+    }).then((dbBusiness)=>{
+        res.json(dbBusiness);
+    }).catch(function(err) {
+        res.render('error', err);
+    });
+  });
+
+  app.get('/api/search/:searchQuery', (req, res)=>{
+    const Op = Sequelize.Op;
+    const searchQuery = req.params.searchQuery;
+    const requestStart = Date.now();
+    db.Business.findAll({
+        where: {
+            [Op.or]: {
+                legal_name: { [Op.like]: '%' + searchQuery + '%' },
+                doing_business_as_name: { [Op.like]: '%' + searchQuery + '%' },
+                business_activity: { [Op.like]: '%' + searchQuery + '%' },
+                address: { [Op.like]: '%' + searchQuery + '%' },
+                city: { [Op.like]: '%' + searchQuery + '%' },
+                state: { [Op.like]: '%' + searchQuery + '%' },
+                zip_code: { [Op.like]: '%' + searchQuery + '%' },
+                license_id: { [Op.like]: '%' + searchQuery + '%' },
+                license_description: { [Op.like]: '%' + searchQuery + '%' }
+            }            
+        }
+    }).then((dbBusiness)=>{       
+        const processingTime = Date.now() - requestStart;
+        var data = { results: dbBusiness, processingTime: processingTime }
+        res.json(data);
+    }).catch(function(err) {
+        res.render('error', err);
+    });
+  });
+
+  app.get('/api/getBusiness/:id', (req, res)=>{
+    db.Business.findByPk(req.params.id).then((dbBusiness)=>{
+        res.json(dbBusiness);
+    }).catch(function(err) {
+        res.render('error', err);
+    });
+  });
+
   app.get('/api/loadOdata', (req,res)=>{
-    //let jsonData = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
-    https.get('https://data.cityofchicago.org/api/odata/v4/uupf-x98q?$top=5', (response)=>{
+    https.get('https://data.cityofchicago.org/api/odata/v4/uupf-x98q?$top=2000', (response)=>{
         let data = '';
         response.on('data', (chunk) => {
             data += chunk;
           });
         response.on('end', ()=>{
-            //res.json(JSON.parse(data));
-            let dataArray = JSON.parse(data);
-            //console.log(dataArray.value.length);
+            var dataArray = JSON.parse(data);
             for (var i = 0; i < dataArray.value.length; i++){
                 db.Business.create(dataArray.value[i]);
             }
-            res.json(JSON.parse(data));
+            res.json('JSON.parse(data)');
         }).on('error', (err) => {
             console.log("Error: " + err.message);
         });
