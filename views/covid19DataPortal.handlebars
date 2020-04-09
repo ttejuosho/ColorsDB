@@ -1,0 +1,106 @@
+<div class="jumbotron pt-4">
+    <h3 class="text-dark">Covid-19 Data Portal</h3>
+    <div>
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" id="countryCodes" class="form-control countryCodes" placeholder="Worldwide"
+                    aria-label="Search" aria-describedby="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-danger" type="button" id="goSearch" onclick="loadCovidData()">Get
+                        Data</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="jumbotron pt-4 pb-4 d-none" id="covidResults">
+    <div class="modal-dialogg">
+        <div class="modal-contentt" style="width: 700px;">
+            <div class="modal-headerr">
+                <h4 id="resultsHeader" class="text-dark"></h4>
+            </div>
+            <div class="modal-bodyy pt-0 pr-0">
+                <form>
+                    <div class="form-group row mb-0">
+                        <label for="confirmed" class="col-3 col-form-label">Cases:</label>
+                        <div class="col-7">
+                            <span class="form-control-plaintext text-danger" id="confirmed"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="recovered" class="col-3 col-form-label">Recovered:</label>
+                        <div class="col-7">
+                            <span class="form-control-plaintext text-danger" id="recovered"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="critical" class="col-3 col-form-label">Critical:</label>
+                        <div class="col-7">
+                            <span class="form-control-plaintext text-danger" id="critical"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <label for="deaths" class="col-3 col-form-label">Deaths:</label>
+                        <div class="col-7">
+                            <span class="form-control-plaintext text-danger" id="deaths"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    fetch('https://restcountries.eu/rest/v2/all').then(function (data) {
+        return data.json();
+    }).then((data) => {
+        $("#countryCodes").selectize({
+            maxItems: 1,
+            create: false,
+            valueField: 'alpha2Code',
+            labelField: 'name',
+            searchField: ['name', 'alpha2Code', 'capital', 'region', 'subregion', 'numericCode'],
+            preload: true,
+            render: {
+                option: function (item, escape) {
+                    return '<div>' + escape(item.alpha2Code + ' - ' + item.name) + '</div>';
+                }
+            },
+            load: function (query, callback) {
+                if (!query.length) return callback();
+                callback(data);
+            },
+            onChange: function(value){
+                loadCovidData();
+            }
+        });
+    });
+
+    function loadCovidData() {
+        var countryCode = $('#countryCodes')[0].selectize.getValue();
+        var apiUrl = '/api/covid19/' + countryCode;
+        if (countryCode.length < 1) { apiUrl = '/api/covid/totals'; }
+        //console.log(countryCode);
+        //console.log(apiUrl);
+        fetch(apiUrl).then((data) => {
+            return data.json();
+        }).then((data) => {
+            //console.log(data);
+            if (data[0].country !== undefined) {
+                $('#resultsHeader').text('Covid-19 data for ' + data[0].country);
+            } else {
+                $('#resultsHeader').text('Worldwide Covid-19 data');
+            }
+
+            $('#confirmed').text(data[0].confirmed);
+            $('#recovered').text(data[0].recovered);
+            $('#critical').text(data[0].critical);
+            $('#deaths').text(data[0].deaths);
+            $('#covidResults').removeClass('d-none');
+        });
+    }
+
+</script>

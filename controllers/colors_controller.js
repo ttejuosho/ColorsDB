@@ -20,6 +20,10 @@ router.get("/advancedsearch", (req, res) => {
   res.render("advancedsearch");
 });
 
+router.get("/covid19DataPortal", (req, res) => {
+  res.render("covid19DataPortal");
+});
+
 router.get("/index", (req, res) => {
   db.Color.findAll({}).then((dbColor) => {
     var hbsObject = {

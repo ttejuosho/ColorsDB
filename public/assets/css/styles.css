@@ -39,6 +39,16 @@ body {
     padding: 0rem;
 }
 
+.countryCodes .form-control{
+    padding: 0.5rem 0.5rem;
+}
+
+.countryCodes > .selectize-input{
+    line-height: 1.6;
+    font-size: 14px;
+    padding: unset !important;
+}
+
 .selectize-dropdown-content{
     background: white;
 }
