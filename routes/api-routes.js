@@ -2,7 +2,9 @@
 var db = require("../models");
 var Sequelize = require("sequelize");
 const https = require("https");
-let request = require("request");
+var request = require("request");
+var fs = require("fs");
+var es = require("event-stream");
 
 // Routes
 // =============================================================
@@ -256,6 +258,74 @@ module.exports = function (app) {
     );
   });
 
+  app.get("/api/loadFileData", (req, res) => {
+    var biz = [];
+    var s = fs
+      .createReadStream("8612.csv")
+      .pipe(es.split("\\"))
+      .pipe(
+        es.mapSync((business) => {
+          //console.log(business.length);
+          var businessArray = business.split(',');
+          //console.log("===========");
+          if (businessArray.length === 16) {
+
+          //     var BusinessObjArray = [];
+          //     businessArray[i].replace('"', '');
+          //     businessArray[i].replace('/"/g', '');
+          //     businessArray[i].replace('/"}/g', '');
+          //     BusinessObjArray.push(businessArray[i]);
+          //   }
+          var BusinessObjArray = [];
+            for (var j = 0; j < businessArray.length; j++ ){
+              //console.log(businessArray[j].replace('"}', ''));
+              //var temp = businessArray[j];
+              var temp2 = businessArray[j].replace('"', '');
+              var temp3 = temp2.substring(0, temp2.length - 1);
+              if (temp3.includes("Business Associations")){ temp3 = temp3.substring(0, temp3.length - 1);}
+              //console.log(temp3);
+              BusinessObjArray.push(temp3);
+            }
+             
+for (var k = 0; k < BusinessObjArray.length; k++ ){
+        var companyName = BusinessObjArray[0].substring(1, BusinessObjArray[0].length);
+        //console.log(companyName);
+                var cleanObj = {
+                Company: companyName,
+                Address: BusinessObjArray[1],
+                City: BusinessObjArray[2],
+                State: BusinessObjArray[3],
+                Zip: BusinessObjArray[4],
+                County: BusinessObjArray[5],
+                Phone: BusinessObjArray[6],
+                Website: BusinessObjArray[7],
+                Contact: BusinessObjArray[8],
+                Title: BusinessObjArray[9],
+                "Direct Phone": BusinessObjArray[10],
+                Email: BusinessObjArray[11],
+                Sales: BusinessObjArray[12],
+                Employees: BusinessObjArray[13],
+                "SIC Code": BusinessObjArray[14],
+                Industry: BusinessObjArray[15],
+              };
+
+}            
+              console.log(cleanObj);
+              db.Business.create(cleanObj);
+          }
+
+          //biz.push(business);
+        })
+      )
+      .on("error", (err) => {
+        console.log("Error while reading file.", err);
+      })
+      .on("end", () => {
+        console.log("Read File Successfull");
+        console.log(biz);
+      });
+  });
+
   app.get("/api/covid19/:countrycode", (req, res) => {
     var options = {
       method: "GET",
@@ -317,5 +387,4 @@ module.exports = function (app) {
       res.send(JSON.parse(body));
     });
   });
-  
 };
