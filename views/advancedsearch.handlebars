@@ -11,7 +11,7 @@
             </div>
         </form>
     </div>
-    <small id="showingResults" class="form-text text-muted"></small>
+    <small id="showingResults" class="form-text text-muted">Search for Chicago businesses by virtually any keyword including zip code, license type, business activity, street, city, state, license id, parent company name etc.</small>
 </div>
 
 
@@ -96,13 +96,17 @@
                     '</div>' +
                     '</div>' +
                     '</div>';
-                $('#spinner').attr('hidden', true);
+               
                 $('#resultsDiv').append(html);
             }
+            
             $('#showingResults').text('Displaying ' + data.length + ' results (' + res.processingTime / 1000 + ' seconds)');
+        }).then(()=>{
+            $('#spinner').attr('hidden', true);
+            $('#searchBy').val('');
         });
 
-        $('#searchBy').val('');
+        
 
     }
 
