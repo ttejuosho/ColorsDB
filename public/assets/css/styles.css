@@ -16,7 +16,8 @@
 }
 
 body {
-    background-image: url("../images/colors-bg.jpg");
+    /* background-image: url("../images/colors-bg.jpg"); */
+    background-color: #fbfbfb;
     background-position: center;
     background-size: cover;
     font-size: 0.9rem;
