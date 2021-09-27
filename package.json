@@ -17,7 +17,7 @@
     "fs": "0.0.1-security",
     "method-override": "^3.0.0",
     "mysql2": "^1.6.5",
-    "nodemon": "^1.18.10",
+    "nodemon": "^2.0.13",
     "request": "^2.88.2",
     "sequelize": "^5.19.0"
   }
