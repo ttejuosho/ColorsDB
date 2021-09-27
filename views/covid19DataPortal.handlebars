@@ -81,20 +81,19 @@
 <script type="text/javascript">
   fetch('https://restcountries.com/v3/all').then(function(data) { return
   data.json(); }).then((data) => { $("#countryCodes").selectize({ maxItems: 1,
-  create: false, valueField: 'alpha2Code', labelField: 'name', searchField:
-  ['name', 'alpha2Code', 'capital', 'region', 'subregion', 'numericCode'],
-  preload: true, render: { option: function(item, escape) { return '<div>' +
-  escape(item.cca2 + ' - ' + item.name.common) + '</div>'; } }, load:
-  function(query, callback) { if (!query.length) return callback();
-  callback(data); }, onChange: function(value) { loadCovidData(); } }); });
-  function loadCovidData() { var countryCode =
-  $('#countryCodes')[0].selectize.getValue(); var apiUrl = '/api/covid19/' +
-  countryCode; if (countryCode.length < 1) { apiUrl = '/api/covid/totals'; }
-  //console.log(countryCode); //console.log(apiUrl); fetch(apiUrl).then((data)
-  => { return data.json(); }).then((data) => { //console.log(data); if
-  (data[0].country !== undefined) { $('#resultsHeader').text('Covid-19 data for
-  ' + data[0].country); } else { $('#resultsHeader').text('Worldwide Covid-19
-  data'); } $('#confirmed').text(data[0].confirmed);
+  create: false, valueField: 'cca2', labelField: 'name', searchField: ['name',
+  'cca2', 'capital', 'region', 'subregion'], preload: true, render: { option:
+  function(item, escape) { return '<div>' + escape(item.cca2 + ' - ' +
+  item.name.common) + '</div>'; } }, load: function(query, callback) { if
+  (!query.length) return callback(); callback(data); }, onChange:
+  function(value) { loadCovidData(); } }); }); function loadCovidData() { var
+  countryCode = $('#countryCodes')[0].selectize.getValue(); var apiUrl =
+  '/api/covid19/' + countryCode; if (countryCode.length < 1) { apiUrl =
+  '/api/covid/totals'; } fetch(apiUrl).then((data) => { return data.json();
+  }).then((data) => { if (data[0].country !== undefined) {
+  $('#resultsHeader').text('Covid-19 data for ' + data[0].country); } else {
+  $('#resultsHeader').text('Worldwide Covid-19 data'); }
+  $('#confirmed').text(data[0].confirmed);
   $('#recovered').text(data[0].recovered);
   $('#critical').text(data[0].critical); $('#deaths').text(data[0].deaths);
   $('#covidResults').removeClass('d-none'); }); }
